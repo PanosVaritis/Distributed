@@ -1,10 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"
+       xmlns:th="http://www.thymeleaf.org" >
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Project Details</title>
+
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* Απόσταση μεταξύ των στοιχείων */
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .item {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .item strong {
+            display: block;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            font-size: 1em;
+            line-height: 1.6;
+            word-wrap: break-word; /* Χωρίς να βγαίνει από το πλάτος */
+        }
+
+    </style>
 </head>
 <body>
+
+
+<div class="container">
+    <div class="item">
+        <strong>Title</strong>
+        <p th:text="${project.title}"></p>
+    </div>
+
+
+    <div class="item">
+        <strong>Required Funding</strong>
+        <p th:text="${project.requiredFunding}"></p>
+    </div>
+
+    <div class="item">
+        <strong>Funding till now</strong>
+        <p th:text="${project.totalFunding}"></p>
+    </div>
+
+
+    <div class="item">
+        <strong>Description</strong>
+        <p class="description" th:text="${project.description}"></p>
+    </div>
+</div>
+
 
 </body>
 </html>

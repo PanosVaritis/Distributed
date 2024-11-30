@@ -2,6 +2,8 @@ package com.example.crowdfunding.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 public class Supporter {
 
@@ -24,6 +26,16 @@ public class Supporter {
 
     @Column
     private String password;
+
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(
+            name = "supporter_student",
+            joinColumns = @JoinColumn(name = "supporter_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"supporter_id", "project_id"})
+
+    )
+    private List<Project> projects;
 
     public Supporter(Integer id, String firstName, String lastName, String email, String username, String password) {
         Id = id;
@@ -90,6 +102,14 @@ public class Supporter {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
     @Override
