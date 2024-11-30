@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"
-       xmlns:th="http://www.thymeleaf.org" >
+      xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Project Details</title>
@@ -60,6 +60,16 @@
         <strong>Description</strong>
         <p class="description" th:text="${project.description}"></p>
     </div>
+
+    <div class="item">
+            <form action="#" method="post" th:action="@{/project/support/{id}(id=${project.id})}" th:object="${project}">
+                <p>Support if you want!!!!</p>
+                <label for="amount">Amount</label>
+                <input id="amount" type="number" th:field="*{totalFunding}"><br>
+                <button type="submit">Click to confirm</button>
+            </form>
+    </div>
+
 </div>
 
 

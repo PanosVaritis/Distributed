@@ -47,4 +47,13 @@ public class ProjectController {
         return "project/project_details";
     }
 
+
+    @PostMapping("/support/{id}")
+    public String supportProject (@PathVariable Integer id,Model model){
+
+        model.addAttribute("project", projectService.getProject(id));
+        return "project/project_support_form";
+    }
+
+
 }
