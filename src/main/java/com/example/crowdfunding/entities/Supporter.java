@@ -37,6 +37,9 @@ public class Supporter {
     )
     private List<Project> projects;
 
+    @OneToMany(mappedBy = "supporter")
+    private List<Contribution> contributions;
+
     public Supporter(Integer id, String firstName, String lastName, String email, String username, String password) {
         Id = id;
         this.firstName = firstName;
@@ -114,6 +117,14 @@ public class Supporter {
 
     public void addProject(Project project){
         projects.add(project);
+    }
+
+    public List<Contribution> getContributions() {
+        return contributions;
+    }
+
+    public void setContributions(List<Contribution> contributions) {
+        this.contributions = contributions;
     }
 
     @Override

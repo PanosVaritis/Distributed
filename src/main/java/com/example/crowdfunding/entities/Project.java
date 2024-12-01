@@ -37,10 +37,9 @@ public class Project {
 
     )
     private List<Supporter> supporters;
-//
-//    @ManyToOne
-//    @JoinColumn(name = "creator_id")
-//    public Creator creator;
+
+    @OneToMany(mappedBy = "project")
+    private List<Contribution> contributions;
 
     public Project(Integer id, String title, String description, double requiredFunding) {
         this.id = id;
@@ -130,6 +129,14 @@ public class Project {
 
     public void addSupporter (Supporter sup){
         supporters.add(sup);
+    }
+
+    public List<Contribution> getContributions() {
+        return contributions;
+    }
+
+    public void setContributions(List<Contribution> contributions) {
+        this.contributions = contributions;
     }
 
     @Override
