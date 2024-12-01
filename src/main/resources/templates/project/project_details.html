@@ -68,9 +68,20 @@
     <div class="item">
             <form action="#" method="post" th:action="@{/project/support/{id}(id=${project.id})}">
                 <p>Support if you want!!!!</p>
-                <label for="amount">Amount</label>
-                <input id="amount" type="number" name="amount" placeholder="Amount"><br><br>
-                <button type="submit">Click to confirm</button>
+                <div>
+                    <label for="amount">Amount</label>
+                    <input id="amount" type="number" name="amount" placeholder="Amount"><br><br>
+                </div>
+                <div>
+                    <label for="student">Select Student:</label>
+                    <select id="student" name="supId" required>
+                        <option value="" disabled selected>Select Student</option>
+                        <th:block th:each="sup : ${supList}">
+                            <option th:value="${sup.id}" th:text="${sup.lastName}"></option>
+                        </th:block>
+                    </select>
+                </div>
+                    <button type="submit">Click to confirm</button>
             </form>
     </div>
 

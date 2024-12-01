@@ -43,7 +43,6 @@ public class SupporterController {
 
     @GetMapping("/details/{id}")
     public String supporterDetails (@PathVariable Integer id, Model model){
-
         Supporter sup = supporterService.getSupporter(id);
         model.addAttribute("supporter", sup);
         return "supporter/supporter_details";

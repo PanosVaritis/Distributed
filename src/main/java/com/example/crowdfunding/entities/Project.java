@@ -15,7 +15,7 @@ public class Project {
     @Column
     private String title;
 
-    @Column
+    @Column (columnDefinition = "TEXT")
     private String description;
 
     @Column
@@ -30,7 +30,7 @@ public class Project {
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
-            name = "supporter_student",
+            name = "supporter_project",
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "supporter_id"),
             uniqueConstraints = @UniqueConstraint(columnNames = {"project_id", "supporter_id"})
@@ -126,6 +126,10 @@ public class Project {
                 this.totalFunding = this.totalFunding + amount;
             }
         }
+    }
+
+    public void addSupporter (Supporter sup){
+        supporters.add(sup);
     }
 
     @Override

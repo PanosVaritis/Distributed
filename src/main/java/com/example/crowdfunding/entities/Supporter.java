@@ -29,7 +29,7 @@ public class Supporter {
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
-            name = "supporter_student",
+            name = "supporter_project",
             joinColumns = @JoinColumn(name = "supporter_id"),
             inverseJoinColumns = @JoinColumn(name = "project_id"),
             uniqueConstraints = @UniqueConstraint(columnNames = {"supporter_id", "project_id"})
@@ -110,6 +110,10 @@ public class Supporter {
 
     public void setProjects(List<Project> projects) {
         this.projects = projects;
+    }
+
+    public void addProject(Project project){
+        projects.add(project);
     }
 
     @Override

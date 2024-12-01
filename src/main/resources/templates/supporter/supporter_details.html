@@ -60,11 +60,7 @@
   <p>Bellow is a list with the project that the user has supported</p>
 
   <ul th:each="sup : ${supporter.projects}">
-    <li th:text="${sup.title}">
-      <ul>
-        <li th:text="${sup.totalFunding}"></li>
-      </ul>
-    </li>
+    <li th:text="${sup.title}"></li>
   </ul>
 
 
