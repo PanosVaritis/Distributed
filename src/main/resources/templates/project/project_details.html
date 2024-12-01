@@ -55,6 +55,10 @@
         <p th:text="${project.totalFunding}"></p>
     </div>
 
+    <div class="item">
+        <strong>Funding to go</strong>
+        <p th:text="${project.requiredFunding - project.totalFunding}"></p>
+    </div>
 
     <div class="item">
         <strong>Description</strong>
@@ -62,10 +66,10 @@
     </div>
 
     <div class="item">
-            <form action="#" method="post" th:action="@{/project/support/{id}(id=${project.id})}" th:object="${project}">
+            <form action="#" method="post" th:action="@{/project/support/{id}(id=${project.id})}">
                 <p>Support if you want!!!!</p>
                 <label for="amount">Amount</label>
-                <input id="amount" type="number" th:field="*{totalFunding}"><br>
+                <input id="amount" type="number" name="amount" placeholder="Amount"><br><br>
                 <button type="submit">Click to confirm</button>
             </form>
     </div>

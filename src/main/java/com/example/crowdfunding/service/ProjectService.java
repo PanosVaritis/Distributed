@@ -31,4 +31,11 @@ public class ProjectService {
         return projectRepository.findById(projectId).get();
     }
 
+    @Transactional
+    public void updateAmount(Integer projectId, double amount){
+        Project pro = projectRepository.findById(projectId).get();
+        pro.addAmount(amount);
+        projectRepository.save(pro);
+    }
+
 }

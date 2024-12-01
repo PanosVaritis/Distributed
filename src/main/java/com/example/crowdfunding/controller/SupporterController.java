@@ -4,10 +4,7 @@ import com.example.crowdfunding.entities.Supporter;
 import com.example.crowdfunding.service.SupporterService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 
 @Controller
@@ -42,6 +39,14 @@ public class SupporterController {
         System.out.println ("Supporters after: "+supporterService.getSupporters());
         model.addAttribute("supporters", supporterService.getSupporters());
         return "supporter/supporter";
+    }
+
+    @GetMapping("/details/{id}")
+    public String supporterDetails (@PathVariable Integer id, Model model){
+
+        Supporter sup = supporterService.getSupporter(id);
+        model.addAttribute("supporter", sup);
+        return "supporter/supporter_details";
     }
 
 }

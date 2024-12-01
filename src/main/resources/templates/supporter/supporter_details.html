@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Supporter</title>
+
+  <style>
+
+    .five-column-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-family: Arial, sans-serif;
+    }
+
+    .five-column-table th, .five-column-table td {
+      border: 1px solid #dddddd;
+      padding: 8px;
+      text-align: left;
+    }
+
+    .five-column-table th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+    }
+
+    .five-column-table tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    .five-column-table td:hover {
+      background-color: #f1f1f1;
+    }
+
+  </style>
+</head>
+
+<body>
+<div>
+  <table class="five-column-table">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Username</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td th:text="${supporter.firstName}"></td>
+        <td th:text="${supporter.lastName}"></td>
+        <td th:text="${supporter.email}"></td>
+        <td th:text="${supporter.username}"></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Bellow is a list with the project that the user has supported</p>
+
+  <ul th:each="sup : ${supporter.projects}">
+    <li th:text="${sup.title}">
+      <ul>
+        <li th:text="${sup.totalFunding}"></li>
+      </ul>
+    </li>
+  </ul>
+
+
+</div>
+
+
+
+</body>
+</html>

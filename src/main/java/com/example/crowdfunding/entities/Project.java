@@ -120,6 +120,14 @@ public class Project {
         this.supporters = supporters;
     }
 
+    public void addAmount(double amount){
+        if (this.totalFunding <= this.requiredFunding){
+            if ((this.requiredFunding - this.totalFunding) >= amount){
+                this.totalFunding = this.totalFunding + amount;
+            }
+        }
+    }
+
     @Override
     public String toString() {
         return "Project{" +

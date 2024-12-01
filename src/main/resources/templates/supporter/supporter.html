@@ -44,6 +44,7 @@
         <th>First Name</th>
         <th>Last Name</th>
         <th>Email</th>
+        <th>Details</th>
       </tr>
     </thead>
     <tbody>
@@ -51,6 +52,9 @@
         <td th:text="${sup.firstName}"></td>
         <td th:text="${sup.lastName}"></td>
         <td th:text="${sup.email}"></td>
+        <td>
+          <a th:href="@{/supporter/details/{id}(id=${sup.id})}" th:text="'Supporter Details'"></a>
+        </td>
       </tr>
     </tbody>
   </table>
@@ -59,3 +63,4 @@
 
 </body>
 </html>
+

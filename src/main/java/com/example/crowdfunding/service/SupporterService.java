@@ -27,5 +27,10 @@ public class SupporterService {
         supporterRepository.save(supporter);
     }
 
+    @Transactional
+    public Supporter getSupporter(Integer supporterId){
+        return supporterRepository.findById(supporterId).get();
+    }
+
 
 }

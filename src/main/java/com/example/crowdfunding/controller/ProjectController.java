@@ -49,10 +49,10 @@ public class ProjectController {
 
 
     @PostMapping("/support/{id}")
-    public String supportProject (@PathVariable Integer id,Model model){
-
-        model.addAttribute("project", projectService.getProject(id));
-        return "project/project_support_form";
+    public String supportProject (@PathVariable Integer id, @RequestParam double amount,Model model){
+        projectService.updateAmount(id, amount);
+        model.addAttribute("listProjects", projectService.getProjects());
+        return "project/project";
     }
 
 
