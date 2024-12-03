@@ -70,18 +70,19 @@ public class ProjectController {
 
         //Adding the amount of that the supporter provided to the total amount of the project
         projectService.updateAmount(id, amount);
-
-        //Adding the project to the list of the supporter_projects
-        supporterService.updateSupporterProjectList(project, supporter);
-
-        //Adding the supporter to the list of the project_supporter
-        projectService.updateProjectSupporterList(project, supporter);
-
+//
         //Adding the contribution to the project_contribution list
         projectService.updateProjectContributionList(project, contribution);
 
         //Adding the contribution to the supporter_contribution list
         supporterService.updateSupporterContributionList(supporter, contribution);
+
+        //Adding the project to the list of the supporter_projects
+        supporterService.updateSupporterProjectList(project, supporter);
+//
+//        //Adding the supporter to the list of the project_supporter
+//        projectService.updateProjectSupporterList(project, supporter);
+//
 
         model.addAttribute("listProjects", projectService.getProjects());
 
