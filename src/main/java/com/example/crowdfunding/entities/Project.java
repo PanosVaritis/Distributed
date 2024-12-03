@@ -28,14 +28,14 @@ public class Project {
     private boolean status;
     //True if the project is approved by the admin, false if the project has yet to be approved
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(
-            name = "supporter_project",
-            joinColumns = @JoinColumn(name = "project_id"),
-            inverseJoinColumns = @JoinColumn(name = "supporter_id"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"project_id", "supporter_id"})
-
-    )
+    @ManyToMany(mappedBy = "projects", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+//    @JoinTable(
+//            name = "supporter_project",
+//            joinColumns = @JoinColumn(name = "project_id"),
+//            inverseJoinColumns = @JoinColumn(name = "supporter_id"),
+//            uniqueConstraints = @UniqueConstraint(columnNames = {"project_id", "supporter_id"})
+//
+//    )
     private List<Supporter> supporters;
 
     @OneToMany(mappedBy = "project")

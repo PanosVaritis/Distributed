@@ -64,13 +64,18 @@ public class ProjectController {
         Project project = projectService.getProject(id);
         Supporter supporter = supporterService.getSupporter(supId);
 
+        //I must make sure that the support cannot support the same project twice
+        if (supporter.validateSupport(id)){
+            System.out.println ("The supporter already supports this project");
+            return "index";
+        }
         //I create a new contribution with the amount, the supporter and the project, and saves it
         Contribution contribution = new Contribution(amount, project, supporter);
         contributionService.saveContribution(contribution);
 
         //Adding the amount of that the supporter provided to the total amount of the project
         projectService.updateAmount(id, amount);
-//
+
         //Adding the contribution to the project_contribution list
         projectService.updateProjectContributionList(project, contribution);
 
@@ -79,10 +84,9 @@ public class ProjectController {
 
         //Adding the project to the list of the supporter_projects
         supporterService.updateSupporterProjectList(project, supporter);
-//
-//        //Adding the supporter to the list of the project_supporter
-//        projectService.updateProjectSupporterList(project, supporter);
-//
+
+        //Adding the supporter to the list of the project_supporter
+        projectService.updateProjectSupporterList(project, supporter);
 
         model.addAttribute("listProjects", projectService.getProjects());
 

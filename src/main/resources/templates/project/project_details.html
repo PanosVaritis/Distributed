@@ -73,9 +73,9 @@
                     <input id="amount" type="number" name="amount" placeholder="Amount"><br><br>
                 </div>
                 <div>
-                    <label for="student">Select Student:</label>
+                    <label for="student">Select Supporter:</label>
                     <select id="student" name="supId" required>
-                        <option value="" disabled selected>Select Student</option>
+                        <option value="" disabled selected>Select Supporter</option>
                         <th:block th:each="sup : ${supList}">
                             <option th:value="${sup.id}" th:text="${sup.lastName}"></option>
                         </th:block>

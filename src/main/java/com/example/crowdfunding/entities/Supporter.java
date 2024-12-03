@@ -3,6 +3,7 @@ package com.example.crowdfunding.entities;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 public class Supporter {
@@ -31,8 +32,8 @@ public class Supporter {
     @JoinTable(
             name = "supporter_project",
             joinColumns = @JoinColumn(name = "supporter_id"),
-            inverseJoinColumns = @JoinColumn(name = "project_id")
-//            uniqueConstraints = @UniqueConstraint(columnNames = {"supporter_id", "project_id"})
+            inverseJoinColumns = @JoinColumn(name = "project_id"),
+            uniqueConstraints = @UniqueConstraint(columnNames = {"supporter_id", "project_id"})
 
     )
     private List<Project> projects;
@@ -131,6 +132,16 @@ public class Supporter {
         contributions.add(contribution);
     }
 
+    public boolean validateSupport (Integer id){
+
+        for (Project project : this.projects) {
+            if (project.getId().equals(id))
+                return true;
+        }
+
+        return false;
+    }
+    
     @Override
     public String toString() {
         return "Supporter{" +
