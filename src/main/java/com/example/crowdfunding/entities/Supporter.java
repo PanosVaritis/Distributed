@@ -31,8 +31,8 @@ public class Supporter {
     @JoinTable(
             name = "supporter_project",
             joinColumns = @JoinColumn(name = "supporter_id"),
-            inverseJoinColumns = @JoinColumn(name = "project_id"),
-            uniqueConstraints = @UniqueConstraint(columnNames = {"supporter_id", "project_id"})
+            inverseJoinColumns = @JoinColumn(name = "project_id")
+//            uniqueConstraints = @UniqueConstraint(columnNames = {"supporter_id", "project_id"})
 
     )
     private List<Project> projects;
@@ -125,6 +125,10 @@ public class Supporter {
 
     public void setContributions(List<Contribution> contributions) {
         this.contributions = contributions;
+    }
+
+    public void addContributionToSupporter(Contribution contribution){
+        contributions.add(contribution);
     }
 
     @Override

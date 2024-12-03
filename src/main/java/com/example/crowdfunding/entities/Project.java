@@ -139,6 +139,11 @@ public class Project {
         this.contributions = contributions;
     }
 
+    public void addContribution (Contribution contribution){
+        contributions.add(contribution);
+    }
+
+
     @Override
     public String toString() {
         return "Project{" +

@@ -1,6 +1,8 @@
 package com.example.crowdfunding.service;
 
+import com.example.crowdfunding.entities.Contribution;
 import com.example.crowdfunding.entities.Project;
+import com.example.crowdfunding.entities.Supporter;
 import com.example.crowdfunding.repository.ProjectRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -36,6 +38,18 @@ public class ProjectService {
         Project pro = projectRepository.findById(projectId).get();
         pro.addAmount(amount);
         projectRepository.save(pro);
+    }
+
+    @Transactional
+    public void updateProjectSupporterList(Project project, Supporter supporter){
+        project.addSupporter(supporter);
+        projectRepository.save(project);
+    }
+
+    @Transactional
+    public void updateProjectContributionList(Project project, Contribution contribution){
+        project.addContribution(contribution);
+        projectRepository.save(project);
     }
 
 }

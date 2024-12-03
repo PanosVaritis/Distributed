@@ -32,7 +32,18 @@
     .five-column-table td:hover {
       background-color: #f1f1f1;
     }
+    ul {
+      list-style-type: none; /* Αφαιρεί τις κουκκίδες */
+      padding: 0;            /* Αφαιρεί την προεπιλεγμένη απόσταση από τα όρια */
+    }
 
+    li {
+      background-color: #f0f0f0; /* Χρώμα φόντου για κάθε item */
+      margin: 5px 0;             /* Απόσταση πάνω-κάτω από τα items */
+      padding: 10px;             /* Εσωτερική απόσταση */
+      border: 1px solid #ddd;    /* Οριο γύρω από κάθε item */
+      border-radius: 5px;        /* Στρογγυλεμένες γωνίες */
+    }
   </style>
 </head>
 
@@ -59,8 +70,10 @@
 
   <p>Bellow is a list with the project that the user has supported</p>
 
-  <ul th:each="sup : ${supporter.projects}">
-    <li th:text="${sup.title}"></li>
+  <ul th:each="con : ${supporter.contributions}">
+    <li th:text="${con.project.title}"></li>
+    <li th:text="${con.amount}"></li>
+    <li th:text="${con.time}"></li>
   </ul>
 
 

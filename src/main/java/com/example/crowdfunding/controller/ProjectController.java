@@ -1,8 +1,10 @@
 package com.example.crowdfunding.controller;
 
 
+import com.example.crowdfunding.entities.Contribution;
 import com.example.crowdfunding.entities.Project;
 import com.example.crowdfunding.entities.Supporter;
+import com.example.crowdfunding.service.ContributionService;
 import com.example.crowdfunding.service.ProjectService;
 import com.example.crowdfunding.service.SupporterService;
 import org.springframework.stereotype.Controller;
@@ -15,10 +17,12 @@ public class ProjectController {
 
     private ProjectService projectService;
     private SupporterService supporterService;
+    private ContributionService contributionService;
 
-    public ProjectController(ProjectService projectService, SupporterService supporterService) {
+    public ProjectController(ProjectService projectService, SupporterService supporterService, ContributionService contributionService) {
         this.projectService = projectService;
         this.supporterService = supporterService;
+        this.contributionService = contributionService;
     }
 
     @GetMapping("")
@@ -56,21 +60,31 @@ public class ProjectController {
     public String supportProject(@PathVariable Integer id, @RequestParam("amount") double amount, @RequestParam("supId") Integer supId
             , Model model) {
 
-        System.out.println ("The amount is: "+amount);
-        System.out.println ("The project id is: "+id);
-        System.out.println ("The supporter id is: "+supId);
-        //adding the amount to the total
+        //We bring the project and the supporter based on their IDs
+        Project project = projectService.getProject(id);
+        Supporter supporter = supporterService.getSupporter(supId);
+
+        //I create a new contribution with the amount, the supporter and the project, and saves it
+        Contribution contribution = new Contribution(amount, project, supporter);
+        contributionService.saveContribution(contribution);
+
+        //Adding the amount of that the supporter provided to the total amount of the project
         projectService.updateAmount(id, amount);
-        //adding the project to the supporter list
-        Supporter sup = supporterService.getSupporter(supId);
-        sup.addProject(projectService.getProject(id));
-        supporterService.saveSupporter(sup);
-        //adding the supporter to the project list
-        Project pro = projectService.getProject(id);
-        pro.addSupporter(sup);
-        projectService.saveProject(pro);
-//        supporterService.updateProjectList(id, supId);
-//        model.addAttribute("listProjects", projectService.getProjects());
+
+        //Adding the project to the list of the supporter_projects
+        supporterService.updateSupporterProjectList(project, supporter);
+
+        //Adding the supporter to the list of the project_supporter
+        projectService.updateProjectSupporterList(project, supporter);
+
+        //Adding the contribution to the project_contribution list
+        projectService.updateProjectContributionList(project, contribution);
+
+        //Adding the contribution to the supporter_contribution list
+        supporterService.updateSupporterContributionList(supporter, contribution);
+
+        model.addAttribute("listProjects", projectService.getProjects());
+
         return "project/project";
     }
 

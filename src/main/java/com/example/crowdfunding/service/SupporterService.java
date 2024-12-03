@@ -1,5 +1,6 @@
 package com.example.crowdfunding.service;
 
+import com.example.crowdfunding.entities.Contribution;
 import com.example.crowdfunding.entities.Project;
 import com.example.crowdfunding.entities.Supporter;
 import com.example.crowdfunding.repository.ProjectRepository;
@@ -13,7 +14,6 @@ import java.util.List;
 public class SupporterService {
 
     private SupporterRepository supporterRepository;
-//    private ProjectService projectService;
 
     public SupporterService(SupporterRepository supporterRepository) {
         this.supporterRepository = supporterRepository;
@@ -35,15 +35,19 @@ public class SupporterService {
         return supporterRepository.findById(supporterId).get();
     }
 
-//    @Transactional
-//    public void updateProjectList(Integer project_id, Integer supporter_id){
-//        Project pro = projectService.getProject(project_id);
-//        Supporter sup = getSupporter(supporter_id);
-//        sup.addProject(pro);
-//        pro.addSupporter(sup);
-//        saveSupporter(sup);
-//        projectService.saveProject(pro);
-//    }
+    @Transactional
+    public void updateSupporterProjectList(Project project, Supporter supporter){
+        supporter.addProject(project);
+        supporterRepository.save(supporter);
+    }
+
+    @Transactional
+    public void updateSupporterContributionList (Supporter supporter, Contribution contribution){
+        supporter.addContributionToSupporter(contribution);
+        supporterRepository.save(supporter);
+    }
+
+
 
 
 }
